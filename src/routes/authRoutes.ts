@@ -24,7 +24,7 @@ router.get(
     const user = req.user as IUser; // req.user is populated by Passport
     console.log('User authenticated:', user);
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, {
       expiresIn: '1d',
     });
 
