@@ -4,6 +4,7 @@ import {IUser} from '../models/User';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import dotenv from 'dotenv';
+import { log } from 'console';
 dotenv.config();
 
 const router = Router();
@@ -21,6 +22,8 @@ router.get(
   passport.authenticate('google', { session: false }),
   (req, res) => {
     const user = req.user as IUser; // fetched by Passport
+   console.log('User authenticated:', user);
+   
  const token = jwt.sign({ id: user.googleId }, JWT_SECRET, {
   expiresIn: '1d',
 });
