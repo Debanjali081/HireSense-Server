@@ -35,6 +35,11 @@ app.use(
     secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: true, // important for HTTPS
+      sameSite: 'none', // allow cross-origin cookie from frontend
+    },
   })
 );
 
