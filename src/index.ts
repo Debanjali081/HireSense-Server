@@ -19,7 +19,7 @@ const app: Application = express();
 connectDB();
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://hire-sense-client-faxy-wheat.vercel.app/',
   credentials: true,
 }));
 
