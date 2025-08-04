@@ -17,7 +17,9 @@ router.get(
   }),
   (req, res) => {
     // After successful login
-   res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
+    console.log('User logged in:', req.user);
+    console.log('Session:', req.session);
+    res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
 
   }
 );
