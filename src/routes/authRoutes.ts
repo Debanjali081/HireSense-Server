@@ -9,11 +9,6 @@ dotenv.config();
 
 const router = Router();
 
-const JWT_SECRET = process.env.JWT_KEY || 'hireSenseJWTKey';
-console.log('JWT_SECRET:', JWT_SECRET);
-
-
-
 
 // Route to start Google OAuth
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -24,9 +19,7 @@ router.get(
   passport.authenticate('google', { session: false }),
   (req, res) => {
     const user = req.user as IUser; // req.user is populated by Passport
-    console.log('User authenticated:', user);
-
-    const token = jwt.sign({ id: user._id }, JWT_SECRET!, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_KEY!, {
       expiresIn: '1d',
     });
 
