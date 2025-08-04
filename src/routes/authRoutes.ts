@@ -19,7 +19,7 @@ router.get(
   passport.authenticate('google', { session: false }),
   (req, res) => {
     const user = req.user as IUser; // fetched by Passport
- const token = jwt.sign({ id: user.id }, JWT_SECRET, {
+ const token = jwt.sign({ id: user.googleId }, JWT_SECRET, {
   expiresIn: '1d',
 });
     res.redirect(`${process.env.FRONTEND_URL}/dashboard?token=${token}`);
