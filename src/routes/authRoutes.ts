@@ -16,7 +16,6 @@ router.get(
     session: true, // required for session-based login
   }),
   (req, res) => {
-    // After successful login
    res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
 
   }
