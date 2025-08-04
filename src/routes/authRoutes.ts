@@ -21,15 +21,17 @@ router.get(
   '/google/callback',
   passport.authenticate('google', { session: false }),
   (req, res) => {
-    const user = req.user as IUser; // fetched by Passport
-   console.log('User authenticated:', user);
-   
- const token = jwt.sign({ id: user._id }, JWT_SECRET, {
-  expiresIn: '1d',
-});
+    const user = req.user as IUser; // req.user is populated by Passport
+    console.log('User authenticated:', user);
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
+      expiresIn: '1d',
+    });
+
     res.redirect(`${process.env.FRONTEND_URL}/dashboard?token=${token}`);
   }
 );
+
 
 // Logout route
 router.get('/logout', (req, res, next) => {
