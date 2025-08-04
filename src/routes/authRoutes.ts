@@ -24,7 +24,7 @@ router.get(
     const user = req.user as IUser; // fetched by Passport
    console.log('User authenticated:', user);
    
- const token = jwt.sign({ id: user.googleId }, JWT_SECRET, {
+ const token = jwt.sign({ id: user._id }, JWT_SECRET, {
   expiresIn: '1d',
 });
     res.redirect(`${process.env.FRONTEND_URL}/dashboard?token=${token}`);
