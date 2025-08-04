@@ -10,6 +10,8 @@ dotenv.config();
 const router = Router();
 
 const JWT_SECRET = process.env.JWT_KEY || 'hireSenseJWTKey';
+console.log('JWT_SECRET:', JWT_SECRET);
+
 
 
 
@@ -24,7 +26,7 @@ router.get(
     const user = req.user as IUser; // req.user is populated by Passport
     console.log('User authenticated:', user);
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, JWT_SECRET!, {
       expiresIn: '1d',
     });
 
