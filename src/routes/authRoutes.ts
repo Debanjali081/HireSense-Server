@@ -28,6 +28,7 @@ router.get(
 );
 
 
+
 // Logout route
 router.get('/logout', (req, res, next) => {
   req.logout((err) => {
