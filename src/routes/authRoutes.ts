@@ -8,6 +8,8 @@ dotenv.config();
 
 const router = Router();
 
+const JWT_SECRET = process.env.JWT_KEY || 'defaultSecretKey';
+
 // Route to start Google OAuth
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
@@ -17,11 +19,9 @@ router.get(
   passport.authenticate('google', { session: false }),
   (req, res) => {
     const user = req.user as IUser; // fetched by Passport
-    const token = jwt.sign(
-      { id: user.googleId, email: user.email },
-      process.env.JWT_KEY,
-      { expiresIn: '1h' }
-    );
+ const token = jwt.sign({ id: user.id }, JWT_SECRET, {
+  expiresIn: '1d',
+});
     res.redirect(`${process.env.FRONTEND_URL}/dashboard?token=${token}`);
   }
 );
