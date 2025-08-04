@@ -8,7 +8,9 @@ dotenv.config();
 
 const router = Router();
 
-const JWT_SECRET = process.env.JWT_KEY || 'defaultSecretKey';
+const JWT_SECRET = process.env.JWT_KEY || 'hireSenseJWTKey';
+
+
 
 // Route to start Google OAuth
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
