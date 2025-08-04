@@ -28,9 +28,12 @@ passport.use(
     },
     async (_accessToken, _refreshToken, profile, done) => {
       try {
+        console.log('Google OAuth callback profile:', profile);
         const user = await findOrCreateUser(profile);
+        console.log('User found or created:', user);
         return done(null, user);
       } catch (err) {
+        console.error('Error in Google OAuth callback:', err);
         return done(err as Error, undefined);
       }
     }

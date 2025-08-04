@@ -39,8 +39,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // true in production, false in dev
-      sameSite: 'none', // allow cross-origin cookie from frontend
+      secure: false, // temporarily false for testing
+      sameSite: 'lax', // temporarily lax for testing
       domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : undefined, // set domain for production
     },
   })
