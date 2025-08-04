@@ -15,6 +15,8 @@ import resumeRoutes from './routes/resumeRoutes';
 dotenv.config();
 const app: Application = express();
 
+app.set('trust proxy', 1); // trust first proxy for secure cookies behind proxies
+
 // Connect to 
 connectDB();
 
