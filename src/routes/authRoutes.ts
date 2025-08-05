@@ -12,15 +12,13 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    failureRedirect: '/login',
-    session: true, // required for session-based login
+    failureRedirect: `${process.env.FRONTEND_URL}/login`,
+    session: true
   }),
   (req, res) => {
-    // After successful login
-    console.log('User logged in:', req.user);
-    console.log('Session:', req.session);
-    res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
-
+    req.session.save(() => {
+      res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
+    });
   }
 );
 

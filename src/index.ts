@@ -21,8 +21,12 @@ app.set('trust proxy', 1); // trust first proxy for secure cookies behind proxie
 connectDB();
 
 app.use(cors({
-  origin: 'https://hire-sense-client-faxy-wheat.vercel.app',
+  origin: [
+    'https://hire-sense-client-faxy-wheat.vercel.app',
+    'https://hiresense-server.onrender.com'
+  ],
   credentials: true,
+  exposedHeaders: ['set-cookie']
 }));
 
 
@@ -37,12 +41,14 @@ app.use(
     secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
       httpOnly: true,
-      secure: false, // temporarily false for testing
-      sameSite: 'lax', // temporarily lax for testing
-      domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : undefined, // set domain for production
-    },
+      secure: true, // Must be true in production
+      sameSite: 'none', // Required for cross-site
+      domain: process.env.NODE_ENV === 'production' ? 'hiresense-server.onrender.com' : undefined,
+      maxAge: 24 * 60 * 60 * 1000
+    }
   })
 );
 
